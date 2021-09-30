@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  skip_before_action :login_required, only: [:new, :create]
   protect_from_forgery :except => [:destroy]
   def new
   end
