@@ -2,15 +2,17 @@
 <table>
   <tr>
     <th>title</th>
-    <th>content</th>  
+    <th>content</th>
+    <th>name</th>
   </tr>
-  <% @pictures.each do |f| %>
+  <% @pictures.each do |pic| %>
   <tr>
-    <td><%= f.title %></td>
-    <td><%= f.content %></td>
-    <td><%= link_to "詳細", pictures_path(f.id) %> </td>
-    <td><%= link_to "編集", edit_pictures_path(f.id) %> </td>
-    <td><%= link_to "削除", pictures_path(f.id), method: :delete %> </td>
+    <td><%= pic.title %></td>
+    <td><%= pic.content %></td>
+    <td><%= @users.find(pic.user_id).name %></td>
+    <td><%= link_to "詳細", picture_path(pic.id) %> </td>
+    <td><%= link_to "編集", edit_picture_path(pic.id) %> </td>
+    <td><%= link_to "削除", picture_path(pic.id), method: :delete %> </td>
   </tr>
   <% end %>
 </table>

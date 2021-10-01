@@ -13,7 +13,4 @@
 
 <p>タイトル：<%= @picture.title %></p>
 <p>内容：<%= @picture.content %></p>
-<p>
-  <strong>Image:</strong>
-  <%= image_tag @picture.image.url %>
-</p>
+<%= image_tag @picture.image.url %>
