@@ -1,5 +1,16 @@
 <h1>新規投稿</h1>
-<%= form_with(model: @picture, local: true) do |f| %>
+<p id = "notice"><%= notice %></p>
+<% if @picture.errors.any? %>
+  <div id = "error_explanation">
+    <h2><%= pluralize(@picture.errors.count,"error") %> prohibited this <%= @picture.name %> from being saved: </h2>
+    <ul>
+    <% @picture.errors.full_messages.each do |message| %>
+      <li> <%= message %> </li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+<%= form_with(model: @picture, local: true, url: confirm_pictures_path ) do |f| %>
   <div>
     <%= f.label :title %>
     <%= f.text_field :title %>
@@ -13,6 +24,5 @@
   <%= f.file_field :image %>
   </div>
   <%= f.submit "Create" %>
-
-
+  <%= f.hidden_field :image_cache %>
 <% end %>

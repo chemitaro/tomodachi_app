@@ -1,0 +1,12 @@
+<h1>確認画面</h1>
+<%= form_with(model: @picture, local: true ) do |pic| %>
+  <%= pic.hidden_field :title %>
+  <%= pic.hidden_field :content %>
+  <%= pic.hidden_field :image %>
+  <%= pic.hidden_field :image_cache %>
+  <p>タイトル：<%= @picture.title %></p>
+  <p>内容：<%= @picture.content %></p>
+  <%= image_tag(@picture.image.url) %>
+  <%= pic.submit "登録する" %>
+  <%= pic.submit "戻る", name: 'back' %>
+<% end %>

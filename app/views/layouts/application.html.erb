@@ -11,9 +11,10 @@
   </head>
 
   <body>
-    <% flash.each do |key, value| %>
-      <%= content_tag(:div, value, class: "#{key}") %>
-    <% end %>
+    <header>
+      <p> <strong>tomodachi</strong> book</p>
+    </header>
+
     <% if logged_in? %>
       <%= link_to "一覧", pictures_path %>
       <%= link_to "投稿", new_picture_path %>
@@ -22,6 +23,9 @@
     <% else %>
       <%= link_to "Sign up", new_user_path %>
       <%= link_to "Login", new_session_path %>
+    <% end %>
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>
     <%= yield %>
   </body>

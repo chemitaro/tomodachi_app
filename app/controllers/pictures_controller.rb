@@ -9,10 +9,14 @@ class PicturesController < ApplicationController
   def create
     @picture = Picture.new(picture_params)
     @picture.user_id = current_user.id
-    if @picture.save
-      redirect_to pictures_path
-    else
+    if params[:back]
       render :new
+    else
+      if @picture.save
+        redirect_to pictures_path, notice: "投稿しました"
+      else
+        render :new
+      end
     end
   end
   def show
@@ -23,16 +27,30 @@ class PicturesController < ApplicationController
   end
   def update
     @picture = Picture.find(params[:id])
-    if @picture.update(picture_params)
-      redirect_to pictures_path, notice: "更新しました"
+    if @picture.user_id == current_user.id
+      if @picture.update(picture_params)
+        redirect_to pictures_path, notice: "更新しました"
+      else
+        render :edit
+      end
     else
-      render :edit
+      redirect_to pictures_path, notice: "権限がありません"
     end
   end
+  def destroy
+    @picture = Picture.find(params[:id])
+    if @picture.user_id == current_user.id 
+      @picture.destroy
+      redirect_to pictures_path, notice: "投稿を削除しました"
+    else
+      redirect_to pictures_path, notice: "権限がありません"
+    end
+  end
+  def confirm
+    @picture = Picture.new(picture_params)
+    @picture.user_id = current_user.id
+  end
   
-  
-  
-
   private
   def picture_params
     params.require(:picture).permit(:title, :content, :image, :image_cache)
