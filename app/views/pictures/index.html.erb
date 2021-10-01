@@ -1,1 +1,16 @@
-<h1>Pictures/index</h1>
+<h1>投稿一覧</h1>
+<table>
+  <tr>
+    <th>title</th>
+    <th>content</th>  
+  </tr>
+  <% @pictures.each do |f| %>
+  <tr>
+    <td><%= f.title %></td>
+    <td><%= f.content %></td>
+    <td><%= link_to "詳細", pictures_path(f.id) %> </td>
+    <td><%= link_to "編集", edit_pictures_path(f.id) %> </td>
+    <td><%= link_to "削除", pictures_path(f.id), method: :delete %> </td>
+  </tr>
+  <% end %>
+</table>

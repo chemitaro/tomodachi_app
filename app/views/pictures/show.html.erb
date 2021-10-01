@@ -1,0 +1,19 @@
+<h1>投稿詳細</h1>
+<p id = "notice"><%= notice %></p>
+<% if @picture.errors.any? %>
+  <div id = "error_explanation">
+    <h2><%= pluralize(@picture.errors.count,"error") %> prohibited this <%= @picture.name %> from being saved: </h2>
+    <ul>
+    <% @picture.errors.full_messages.each do |message| %>
+      <li> <%= message %> </li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<p>タイトル：<%= @picture.title %></p>
+<p>内容：<%= @picture.content %></p>
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @picture.image.url %>
+</p>
